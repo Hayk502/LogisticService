@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LogisticService.Calculations
 {
-    internal class PricingService
+    public class PricingService
     {
         private readonly DataContext _context;
 
@@ -24,12 +24,15 @@ namespace LogisticService.Calculations
             if (operationalStatus == null) throw new ArgumentNullException(nameof(operationalStatus));
             if (container == null) throw new ArgumentNullException(nameof(container));
 
+            if (route.FixedPrice.HasValue)
+            {
+                return route.FixedPrice.Value;
+            }
+
 
             var basePrice = CalculateBasePrice(route);
-
-
             var containerCost = container.IsClosed ? 50 : 0;
-            var vehicleCoefficient = GetVehicleCoefficient(vehicleType.Name);
+            var vehicleCoefficient = vehicleType.Coefficient;
             var operationalCost = operationalStatus.IsOperational ? 0 : 100;
 
             return basePrice * vehicleCoefficient + containerCost + operationalCost;
@@ -43,19 +46,19 @@ namespace LogisticService.Calculations
             return distance * costPerUnitDistance;
         }
 
-        private decimal GetVehicleCoefficient(string vehicleTypeName)
-        {
+        //private decimal GetVehicleCoefficient(string vehicleTypeName)
+        //{
 
-            return vehicleTypeName switch
-            {
-                "Sedan" => 1.0m,
-                "SUV" => 1.2m,
-                "Truck" => 1.5m,
-                "Van" => 1.3m,
-                "Pickup" => 1.4m,
-                _ => 1.0m
-            };
-        }
+        //    return vehicleTypeName switch
+        //    {
+        //        "Sedan" => 1.0m,
+        //        "SUV" => 1.2m,
+        //        "Truck" => 1.5m,
+        //        "Van" => 1.3m,
+        //        "Pickup" => 1.4m,
+        //        _ => 1.0m
+        //    };
+        //}
 
         private decimal GetDistance(string startLocation, string endLocation)
         {

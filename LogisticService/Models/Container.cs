@@ -16,5 +16,6 @@ namespace LogisticService.Models
         public int Id { get; set; }
         public bool IsClosed { get; set; }
 
+        public Container() { }
     }
 }

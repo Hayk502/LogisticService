@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LogisticService.Repository
 {
-    internal interface IRepository
+    public interface IRepository
     {
         public interface IRepository<TEntity, TKey, TDataContext> where TEntity : class where TDataContext : DbContext
         {

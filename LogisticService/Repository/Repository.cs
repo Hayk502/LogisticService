@@ -8,7 +8,7 @@ using static LogisticService.Repository.IRepository;
 
 namespace LogisticService.Repository
 {
-    internal class Repository<TEntity, TKey, TDataContext> : IRepository<TEntity, TKey, TDataContext> where TEntity : class  where TDataContext : DbContext
+    public class Repository<TEntity, TKey, TDataContext> : IRepository<TEntity, TKey, TDataContext> where TEntity : class  where TDataContext : DbContext
     {
 
         private readonly TDataContext _context;

@@ -15,5 +15,6 @@ namespace LogisticService.Models
         {
             IsOperational = isOperational;
         }
+        public OperationalStatus() { }
     }
 }

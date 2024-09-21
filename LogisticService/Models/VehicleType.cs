@@ -10,11 +10,14 @@ namespace LogisticService.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public decimal Coefficient { get; set; }
 
-        
-        public VehicleType(string name)
+        public VehicleType(string name, decimal coefficient)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
+            Coefficient = coefficient;
         }
+
+        public VehicleType() { }
     }
 }
