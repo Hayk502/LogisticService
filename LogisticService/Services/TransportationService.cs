@@ -1,4 +1,5 @@
-﻿using LogisticService.Data;
+﻿using LogisticService.Calculations;
+using LogisticService.Data;
 using LogisticService.Models;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using static LogisticService.Repository.IRepository;
 
-namespace LogisticService.Calculations
+namespace LogisticService.Services
 {
-    public class TransportationService
+    public class TransportationService : ITransportationService
     {
         private readonly IRepository<Route, int, DataContext> _routeRepository;
         private readonly IRepository<VehicleType, int, DataContext> _vehicleRepository;

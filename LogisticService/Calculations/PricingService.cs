@@ -24,18 +24,15 @@ namespace LogisticService.Calculations
             if (operationalStatus == null) throw new ArgumentNullException(nameof(operationalStatus));
             if (container == null) throw new ArgumentNullException(nameof(container));
 
-            if (route.FixedPrice.HasValue)
-            {
-                return route.FixedPrice.Value;
-            }
+            var basePrice = route.FixedPrice.HasValue ? route.FixedPrice.Value : CalculateBasePrice(route);
 
-
-            var basePrice = CalculateBasePrice(route);
-            var containerCost = container.IsClosed ? 50 : 0;
             var vehicleCoefficient = vehicleType.Coefficient;
-            var operationalCost = operationalStatus.IsOperational ? 0 : 100;
+            var operationalCoefficient = operationalStatus.Coefficient;
+            var containerCoefficient = container.Coefficient;
 
-            return basePrice * vehicleCoefficient + containerCost + operationalCost;
+            var totalPrice = basePrice * vehicleCoefficient * operationalCoefficient * containerCoefficient;
+
+            return totalPrice;
         }
 
         private decimal CalculateBasePrice(Route route)

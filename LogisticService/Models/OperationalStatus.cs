@@ -10,6 +10,7 @@ namespace LogisticService.Models
     {
         public int Id { get; set; }
         public bool IsOperational { get; set; }
+        public decimal Coefficient { get; set; }
 
         public OperationalStatus(bool isOperational)
         {
